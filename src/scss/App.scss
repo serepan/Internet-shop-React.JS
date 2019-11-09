@@ -1,0 +1,11 @@
+@import "Main/../../sections/main/Main.scss";
+@import "InputElement/../../elements/inputElement/InputElement.scss";
+@import "ButtonElement/../../elements/ButtonElement/ButtonElement.scss";
+@import "Header/../../sections/Header/Header.scss";
+
+@import "vars";
+@import "mixins";
+
+.App {
+    padding: 15px;
+}

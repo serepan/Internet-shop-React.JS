@@ -1,0 +1,19 @@
+@import './../../scss/mixins';
+@import './../../scss/vars';
+
+
+.button {
+    width: 150px;
+    padding: 7px;
+    border-radius: 15px/50%;
+    background-color: $bg-btn;
+    color: $color-btn;
+    text-transform: uppercase;
+    border: 1px solid $border-color;
+    transition: 0.3s;
+    cursor: pointer;
+
+    &:hover {
+        background: rgb(165, 3, 3);
+    }
+}

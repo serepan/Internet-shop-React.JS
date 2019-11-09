@@ -1,0 +1,34 @@
+@import './../../scss/vars';
+
+.container {
+    font-family: $font-base;
+
+    .row {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pizza__item-wrapper {
+        padding: 10px;
+        height: 100%;
+    }
+
+    .pizza__item {
+        padding: 10px;
+        height: $item-height;
+        border: 1px solid red;
+        border-radius: 10px;
+        text-align: center;
+        color: $color-btn;
+        background: linear-gradient(45deg, rgb(110, 8, 8), rgb(8, 8, 226));
+
+        img {
+            width: 70%;
+            border-radius: 50%;
+        }
+
+        &-img {
+            width: 100%;
+        }
+    }
+}
