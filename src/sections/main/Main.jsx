@@ -21,7 +21,11 @@ const Main = () => {
                                         <div className="pizza__item-img">
                                             <img src={pizza.img} alt="pizza image" />
                                         </div>
-                                        <h5>{pizza.price}</h5>
+                                        <h5>{pizza.price} грн.</h5>
+                                        <div className="pizza__item-hover">
+                                            <h4>Состав: {pizza.composition.join(', ')}</h4>
+                                            <h4>{pizza.caloricity} cal</h4>
+                                        </div>
                                     </div>
                                 </div>
                             )

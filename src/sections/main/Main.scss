@@ -1,5 +1,10 @@
 @import './../../scss/vars';
 
+.main {
+    position: relative;
+    background: grey url(https://storage.needpix.com/rsynced_images/pizza-1507444875nkl.jpg) center/cover;
+}
+
 .container {
     font-family: $font-base;
 
@@ -10,10 +15,11 @@
 
     .pizza__item-wrapper {
         padding: 10px;
-        height: 100%;
+        transition: 0.3s;
     }
 
     .pizza__item {
+        position: relative;
         padding: 10px;
         height: $item-height;
         border: 1px solid red;
@@ -21,14 +27,43 @@
         text-align: center;
         color: $color-btn;
         background: linear-gradient(45deg, rgb(110, 8, 8), rgb(8, 8, 226));
+        transition: 0.3s;
+        cursor: pointer;
+
+        &-hover {
+            position: absolute;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.863);
+            z-index: 3;
+            transition: 0.3s;
+        }
+
+        &:hover {
+            .pizza__item-hover {
+                display: flex;
+                transition: 0.3s;
+            }
+        }
 
         img {
             width: 70%;
             border-radius: 50%;
         }
 
-        &-img {
-            width: 100%;
+        h3 {
+            color: gold;
+        }
+        h5 {
+            color: rgb(185, 113, 4);
+            font-style: italic;
         }
     }
 }

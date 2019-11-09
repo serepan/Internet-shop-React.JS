@@ -2,10 +2,13 @@
 @import "InputElement/../../elements/inputElement/InputElement.scss";
 @import "ButtonElement/../../elements/ButtonElement/ButtonElement.scss";
 @import "Header/../../sections/Header/Header.scss";
+@import "Footer/../../sections/Footer/Footer.scss";
 
 @import "vars";
 @import "mixins";
+@import "fontello";
 
-.App {
-    padding: 15px;
+
+html {
+    scroll-behavior: smooth;
 }
