@@ -1,15 +1,18 @@
 import React from 'react';
 import './scss/App.scss';
-import Main from './sections/main/Main';
-import Header from './sections/header/Header';
-import Footer from './sections/footer/Footer';
+import { Route, Switch } from 'react-router-dom';
+import MainPage from './sections/MainPage';
+import Cart from './sections/cart/Cart';
+
 
 const App = () => {
+
   return (
     <div className="App">
-      <Header />
-      <Main />
-      <Footer />
+      <Switch>
+        <Route exact path='/' component={MainPage} />
+        <Route path='/Cart' component={Cart} />
+      </Switch>
     </div>
   );
 }
