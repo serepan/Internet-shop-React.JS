@@ -1,13 +1,12 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-const InputElement = ({id, placeholder}) => {
+const InputElement = ({ id, placeholder, label, type, onInput }) => {
 
     return (
         <div className="input">
-            <label htmlFor="1">asddasdasda</label>
-            <input type="text" id="1" placeholder="asdasdasdasd"/>
+            <label htmlFor={id}> {label} </label>
+            <input type={type} id={id} placeholder={placeholder} onInput={onInput} />
         </div>
 
     )

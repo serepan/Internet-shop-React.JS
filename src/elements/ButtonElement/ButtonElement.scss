@@ -5,6 +5,7 @@
 .button {
     width: 150px;
     padding: 7px;
+    margin: 10px;
     border-radius: 15px/50%;
     background-color: $bg-btn;
     color: $color-btn;
@@ -15,6 +16,19 @@
     z-index: 4;
 
     &:hover {
+        background: rgb(165, 3, 3);
+    }
+}
+
+a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+        text-decoration: none;
+        color: inherit;
         background: rgb(165, 3, 3);
     }
 }

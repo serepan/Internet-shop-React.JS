@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ButtonElement from './../../elements/ButtonElement/ButtonElement';
-
+import promo from '../../data/promocodesList';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
 
@@ -21,43 +22,60 @@ const Cart = () => {
         localStorage.setItem('productsPrice', JSON.stringify(productsPrice))
         localStorage.setItem('productsArr', JSON.stringify(productsArr))
         localStorage.setItem('count', JSON.stringify(count))
-
     }
 
-    return (<div className="cart__order">
-        <div className="container">
-            <div className="cart__order_title">
-                <h1>Ваши покупки</h1>
-            </div>
-            <div className="row">
-                {[...productsArr].map((pizza, index) => {
-                    return (
-                        <div className="pizza__item-wrapper col-12 col-sm-6 col-md-4 col-lg-3" key={index + 22}>
-                            <div className="pizza__item">
-                                <h3>{pizza.name}</h3>
-                                <div className="pizza__item-img">
-                                    <img src={pizza.img} alt="pizza image" />
-                                </div>
-                                <h5>{pizza.price} грн.</h5>
-                                <div className="button_element">
-                                    <ButtonElement
-                                        onClick={removeFromCart}
-                                        title='Убрать из корзины'
-                                    />
+    const usePromo = (e) => {
+        let value = +e.target.value;
+        
+        if (promo.find(val => val === value)) {
+            totalPrice = Math.floor(totalPrice * 0.85);
+        };
+      };
+
+    return (
+        <div className="cart__order">
+            <div className="container">
+                <div className="cart__order_title">
+                    <h1>Ваши покупки</h1>
+                </div>
+                <div className="row">
+                    {[...productsArr].map((pizza, index) => {
+                        return (
+                            <div className="pizza__item-wrapper col-12 col-sm-6 col-md-4 col-lg-3" key={index + 22}>
+                                <div className="pizza__item">
+                                    <h3>{pizza.name}</h3>
+                                    <div className="pizza__item-img">
+                                        <img src={pizza.img} alt="pizza" />
+                                    </div>
+                                    <h5>{pizza.price} грн.</h5>
+                                    <div className="button_element">
+                                        <ButtonElement
+                                            onClick={removeFromCart}
+                                            title='Убрать из корзины'
+                                        />
+                                       
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )
-                })}
-            </div>
-            <div className="total_count">
-                <h1>Общее количество: {count}</h1>
-            </div>
-            <div className="total_price">
-                <h1>Общая сумма: {totalPrice}</h1>
+                        )
+                    })}
+                </div>
+                <div>
+                    <input type="text"/>
+                    <button onClick={usePromo}>usePromo</button>
+                </div>
+                <div className="total_count">
+                    <h1>Общее количество: {count}</h1>
+                </div>
+                <div className="total_price">
+                    <h1>Общая сумма: {totalPrice}</h1>
+                </div>
+                <div className="links">
+                    <Link to="/" className="button">В магазин</Link>
+                    <Link to="/Customer" className="button">Далее</Link>
+                </div>
             </div>
         </div>
-    </div>
     )
 }
 

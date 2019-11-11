@@ -1,10 +1,10 @@
 @import '../../scss/vars';
 
-.cart__order {
-    display: flex;
+.address {
     min-height: 100vh;
     background: grey url(http://pomodoropizza.co.za/wp-content/uploads/pizza-background.jpg) center/cover no-repeat;
-    
+    display: flex;
+
     .container {
         margin: auto;
         padding: 20px;
@@ -14,7 +14,8 @@
         background: rgba(0, 0, 0, 0.714);
     }
 
-    h1 {
+    h3,
+    h2 {
         color: $color-btn
     }
 
@@ -22,11 +23,26 @@
         text-align: center;
     }
 
+    label {
+        color: $color-btn;
+        padding-right: 10px;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    button {
+        margin: 10px auto;
+    }
+
     .links {
 
         a {
             display: inline-block;
             text-transform: uppercase;
+            outline: none;
         }
     }
+
 }

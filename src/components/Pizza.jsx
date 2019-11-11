@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../scss/App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ButtonElement from '../elements/ButtonElement/ButtonElement';
@@ -22,7 +22,7 @@ const Pizza = ({ pizza, setCurrentPizza }) => {
             <div className="pizza__item">
                 <h3>{pizza.name}</h3>
                 <div className="pizza__item-img">
-                    <img src={pizza.img} alt="pizza image" />
+                    <img src={pizza.img} alt="pizza" />
                 </div>
                 <h5>{pizza.price} грн.</h5>
                 <div className="pizza__item-hover">

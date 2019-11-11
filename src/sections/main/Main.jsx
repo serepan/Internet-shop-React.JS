@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './../../scss/App.scss';
 import pizzaList from './../../data/listOfPizzas';
 import 'bootstrap/dist/css/bootstrap.min.css';

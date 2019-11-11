@@ -1,9 +1,6 @@
 import React from 'react';
 import './../../scss/App.scss';
-import pizzaList from './../../data/listOfPizzas';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ButtonElement from './../../elements/ButtonElement/ButtonElement';
-// import { Router, Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -17,20 +14,20 @@ const Footer = () => {
                 <div className="footer__follow">
                     <h4>Follow us on: </h4>
                     <div className="footer__follow-inner">
-                        <a href="">
+                        <a href="#">
                             <i className="icon-twitter"></i>
                         </a>
-                        <a href="">
+                        <a href="#">
                             <i className="icon-facebook"></i>
                         </a>
-                        <a href="">
+                        <a href="#">
                             <i className="icon-telegram"></i>
                         </a>
                     </div>
                 </div>
             </div>
             <a href="#" className="back-to-top">
-                <img src="images/arrow-up.png" alt="" />
+                <img src="images/arrow-up.png" alt="arrow-up" />
             </a>
         </footer>
     )
