@@ -5,14 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CartIcon from '../../components/CartIcon';
 // import { Link } from 'react-router-dom';
 
-const Header = ({count, setCount}) => {
+const Header = ({ count, setCount, arrOfPizzas}) => {
 
     // const [count, setCount] = useState('0')
 
-    // useEffect(() => {
-    //     let prod = JSON.parse(localStorage.getItem('count')).toString() || '0';
-    //     setCount(prod)
-    // }, [count])
 
     return (
         <header className="header">
@@ -21,7 +17,11 @@ const Header = ({count, setCount}) => {
                     <img src="images/pizzeria-logo.png" alt="" />
                 </div>
 
-               <CartIcon/>
+                <CartIcon
+                arrOfPizzas={arrOfPizzas}
+                    count={count}
+                    setCount={setCount}
+                />
             </div>
         </header>
     )

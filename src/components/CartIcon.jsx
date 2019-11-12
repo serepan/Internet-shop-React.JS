@@ -4,13 +4,10 @@ import '../scss/App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 
-const CartIcon = () => {
-
-    const [count, setCount] = useState('0')
+const CartIcon = ({ count, setCount }) => {
 
     useEffect(() => {
-        let prod = JSON.parse(localStorage.getItem('count')) || 0;
-        setCount(prod)
+        
     }, [count])
 
     return (

@@ -15,6 +15,7 @@ const Pizza = ({ pizza, setCurrentPizza }) => {
         localStorage.setItem('productsArr', JSON.stringify(productsArr))
         localStorage.setItem('productsPrice', JSON.stringify(productsPrice))
         localStorage.setItem('count', JSON.stringify(count))
+        ++count;
     }
 
     return (

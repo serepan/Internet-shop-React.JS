@@ -28,8 +28,10 @@ const Cart = () => {
         let value = +e.target.value;
         
         if (promo.find(val => val === value)) {
-            totalPrice = Math.floor(totalPrice * 0.85);
+           return totalPrice = Math.floor(totalPrice * 0.85);
         };
+
+        console.log(totalPrice)
       };
 
     return (
