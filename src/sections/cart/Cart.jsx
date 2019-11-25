@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ButtonElement from './../../elements/ButtonElement/ButtonElement';
 import promo from '../../data/promocodesList';
 import { Link } from 'react-router-dom';
@@ -6,10 +6,15 @@ import { Link } from 'react-router-dom';
 const Cart = () => {
 
     let productsArr = JSON.parse(localStorage.getItem('productsArr')) || [];
-    let count = JSON.parse(localStorage.getItem('count'))
+    let count = productsArr.length;
     let productsPrice = JSON.parse(localStorage.getItem('productsPrice')) || [];
     let totalPrice = productsPrice.length ? productsPrice.reduce((a, b) => a + b) : 0;
+
+    const [total, setTotal] = useState(totalPrice);
     const [currentPizza, setCurrentPizza] = useState({ ...productsArr[0] })
+
+    const inputPromo = useRef();
+    const btnPromo = useRef();
 
     const removeFromCart = (e) => {
         setCurrentPizza(e.target);
@@ -24,15 +29,15 @@ const Cart = () => {
         localStorage.setItem('count', JSON.stringify(count))
     }
 
-    const usePromo = (e) => {
-        let value = +e.target.value;
-        
-        if (promo.find(val => val === value)) {
-           return totalPrice = Math.floor(totalPrice * 0.85);
-        };
+    const usePromo = () => {
+        let value = +inputPromo.current.value;
 
+        if (promo.find(val => val == value)) {
+            setTotal(Math.floor(totalPrice * 0.85));
+            btnPromo.current.disabled = 'true';
+        };
         console.log(totalPrice)
-      };
+    };
 
     return (
         <div className="cart__order">
@@ -55,7 +60,7 @@ const Cart = () => {
                                             onClick={removeFromCart}
                                             title='Убрать из корзины'
                                         />
-                                       
+
                                     </div>
                                 </div>
                             </div>
@@ -63,14 +68,14 @@ const Cart = () => {
                     })}
                 </div>
                 <div>
-                    <input type="text"/>
-                    <button onClick={usePromo}>usePromo</button>
+                    <input type="text" ref={inputPromo} />
+                    <button onClick={usePromo} ref={btnPromo}>usePromo</button>
                 </div>
                 <div className="total_count">
                     <h1>Общее количество: {count}</h1>
                 </div>
                 <div className="total_price">
-                    <h1>Общая сумма: {totalPrice}</h1>
+                    <h1>Общая сумма: {total}</h1>
                 </div>
                 <div className="links">
                     <Link to="/" className="button">В магазин</Link>

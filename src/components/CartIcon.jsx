@@ -4,10 +4,10 @@ import '../scss/App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 
-const CartIcon = ({ count, setCount }) => {
+const CartIcon = ({ count }) => {
 
     useEffect(() => {
-        
+
     }, [count])
 
     return (

@@ -8,13 +8,8 @@ import Pizza from './../../components/Pizza';
 
 
 
-const Main = ({arrOfPizzas, setArrOfPizzas, onSelect}) => {
+const Main = ({ arrOfPizzas, setArrOfPizzas, onSelect, count, setCount }) => {
     const [currentPizza, setCurrentPizza] = useState({ ...pizzaList[0] })
-    // const [arrOfPizzas, setArrOfPizzas] = useState([...pizzaList])
-
-    // useEffect(() => {
-    //     console.log(arrOfPizzas)
-    // }, [arrOfPizzas])
 
     const findPizza = (e) => {
         const value = e.target.value.toLocaleLowerCase().replace(' ', '');
@@ -25,39 +20,17 @@ const Main = ({arrOfPizzas, setArrOfPizzas, onSelect}) => {
         })
     }
 
-    // const onSelect = (value) => {
-    //     const sortedPizzasArr = [...pizzaList].sort((a, b) => {
-    //         let first = a.price;
-    //         let second = b.price;
-    //         switch (value) {
-    //             case 'По возрастанию': {
-    //                 if (first > second) return 1
-    //                 if (first < second) return -1
-    //                 if (first == second) return 0
-    //             };
-    //             case 'По убыванию': {
-    //                 if (first > second) return -1
-    //                 if (first < second) return 1
-    //                 if (first == second) return 0
-    //             };
-    //             default: return arrOfPizzas;
-    //         }
-    //     })
-    //     setArrOfPizzas(sortedPizzasArr);
-    // }
-
-
     return (
         <main className="main">
             <div className="container">
                 <InputElement
-                    onInput={findPizza}
+                onInput={findPizza}
                 />
 
                 <SelectElement
                     onChange={onSelect}
-                    value1='Ничего'
-                    value2='По возрастанию'
+                    value1='Не сортировать'
+                    value2='Цена по возрастанию'
                     value3='По убыванию'
                 />
                 <div className="row">
@@ -68,6 +41,8 @@ const Main = ({arrOfPizzas, setArrOfPizzas, onSelect}) => {
                                     key={id + 1}
                                     pizza={pizza}
                                     setCurrentPizza={setCurrentPizza}
+                                    count={count}
+                                    setCount={setCount}
                                 />
                             )
                         })

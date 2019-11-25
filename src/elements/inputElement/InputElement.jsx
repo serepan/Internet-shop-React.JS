@@ -6,7 +6,7 @@ const InputElement = ({ id, placeholder, label, type, onInput, onChange }) => {
     return (
         <div className="input">
             <label htmlFor={id}> {label} </label>
-            <input type={type} id={id} placeholder={placeholder} onInput={onInput} onChange={onChange}/>
+            <input type={type} id={id} placeholder={placeholder} onInput={(e) => onInput(e)} />
         </div>
 
     )

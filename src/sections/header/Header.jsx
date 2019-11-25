@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './../../scss/App.scss';
-// import pizzaList from './../../data/listOfPizzas';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CartIcon from '../../components/CartIcon';
-// import { Link } from 'react-router-dom';
 
-const Header = ({ count, setCount, arrOfPizzas}) => {
 
-    // const [count, setCount] = useState('0')
-
+const Header = ({ count, setCount, arrOfPizzas }) => {
 
     return (
         <header className="header">
@@ -18,7 +14,7 @@ const Header = ({ count, setCount, arrOfPizzas}) => {
                 </div>
 
                 <CartIcon
-                arrOfPizzas={arrOfPizzas}
+                    arrOfPizzas={arrOfPizzas}
                     count={count}
                     setCount={setCount}
                 />

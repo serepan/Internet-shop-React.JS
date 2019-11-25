@@ -10,15 +10,6 @@ const MainPage = () => {
     let prod = JSON.parse(localStorage.getItem('count')) || 0;
     const [arrOfPizzas, setArrOfPizzas] = useState([...pizzaList])
 
-    useEffect(() => {
-        setCount(prod)
-    }, [prod])
-
-
-    useEffect(() => {
-        console.log(arrOfPizzas)
-    }, [arrOfPizzas])
-
     const findPizza = (e) => {
         const value = e.target.value.toLocaleLowerCase().replace(' ', '');
         [...pizzaList].filter(pizza => {
@@ -28,7 +19,10 @@ const MainPage = () => {
         })
     }
 
-    const onSelect = (value) => {
+    // sort by price
+
+    const onSelect = (e) => {
+        let value = e.target.value;
         const sortedPizzasArr = [...pizzaList].sort((a, b) => {
             let first = a.price;
             let second = b.price;
@@ -61,6 +55,8 @@ const MainPage = () => {
                 setArrOfPizzas={setArrOfPizzas}
                 arrOfPizzas={arrOfPizzas}
                 onSelect={onSelect}
+                count={count}
+                setCount={setCount}
             />
             <Footer />
         </>

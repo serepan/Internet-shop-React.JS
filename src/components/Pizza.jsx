@@ -3,10 +3,10 @@ import '../scss/App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ButtonElement from '../elements/ButtonElement/ButtonElement';
 
-const Pizza = ({ pizza, setCurrentPizza }) => {
+const Pizza = ({ pizza, setCurrentPizza, count, setCount }) => {
     let productsArr = JSON.parse(localStorage.getItem('productsArr')) || [];
     let productsPrice = JSON.parse(localStorage.getItem('productsPrice')) || [];
-    let count = productsArr.length+1;
+    count = productsArr.length;
 
     const addToCart = () => {
         setCurrentPizza(pizza);
@@ -15,7 +15,7 @@ const Pizza = ({ pizza, setCurrentPizza }) => {
         localStorage.setItem('productsArr', JSON.stringify(productsArr))
         localStorage.setItem('productsPrice', JSON.stringify(productsPrice))
         localStorage.setItem('count', JSON.stringify(count))
-        ++count;
+        setCount(++count);
     }
 
     return (
