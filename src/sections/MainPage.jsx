@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import pizzaList from '../data/listOfPizzas';
 import Main from './main/Main';
 import Header from './header/Header';
@@ -6,17 +6,22 @@ import Footer from './footer/Footer';
 
 const MainPage = () => {
 
-    const [count, setCount] = useState(0)
-    let prod = JSON.parse(localStorage.getItem('count')) || 0;
+    let productsArr = JSON.parse(localStorage.getItem('productsArr')) || [];
+    const [count, setCount] = useState(productsArr.length)
+    // let prod = JSON.parse(localStorage.getItem('count')) || 0;
     const [arrOfPizzas, setArrOfPizzas] = useState([...pizzaList])
+
+    // searching by price / composition / name
 
     const findPizza = (e) => {
         const value = e.target.value.toLocaleLowerCase().replace(' ', '');
-        [...pizzaList].filter(pizza => {
+        const filteredPizza = [...pizzaList].filter(pizza => {
             return pizza.name.replace(' ', '').toLocaleLowerCase().includes(value) ||
                 pizza.composition.find(compose => compose.toLocaleLowerCase().includes(value) ||
                     pizza.price.toString().includes(value));
+
         })
+        setArrOfPizzas(filteredPizza)
     }
 
     // sort by price
@@ -30,13 +35,15 @@ const MainPage = () => {
                 case 'По возрастанию': {
                     if (first > second) return 1
                     if (first < second) return -1
-                    if (first == second) return 0
+                    if (first === second) return 0
                 };
+                    break;
                 case 'По убыванию': {
                     if (first > second) return -1
                     if (first < second) return 1
-                    if (first == second) return 0
+                    if (first === second) return 0
                 };
+                    break;
                 default: return arrOfPizzas;
             }
         })
@@ -57,6 +64,7 @@ const MainPage = () => {
                 onSelect={onSelect}
                 count={count}
                 setCount={setCount}
+                findPizza={findPizza}
             />
             <Footer />
         </>

@@ -32,11 +32,12 @@ const Cart = () => {
     const usePromo = () => {
         let value = +inputPromo.current.value;
 
-        if (promo.find(val => val == value)) {
+        if (promo.find(val => val === value)) {
             setTotal(Math.floor(totalPrice * 0.85));
+            localStorage.setItem('totalPrice', JSON.stringify(Math.floor(totalPrice * 0.85)))
             btnPromo.current.disabled = 'true';
         };
-        console.log(totalPrice)
+
     };
 
     return (
@@ -68,8 +69,8 @@ const Cart = () => {
                     })}
                 </div>
                 <div>
-                    <input type="text" ref={inputPromo} />
-                    <button onClick={usePromo} ref={btnPromo}>usePromo</button>
+                    <input type="text" ref={inputPromo} placeholder="Введите промокод" />
+                    <button className="button" onClick={usePromo} ref={btnPromo}>Использовать промокод</button>
                 </div>
                 <div className="total_count">
                     <h1>Общее количество: {count}</h1>

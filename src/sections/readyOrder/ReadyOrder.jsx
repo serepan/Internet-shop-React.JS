@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 const ReadyOrder = () => {
 
     const orderInfo = JSON.parse(localStorage.getItem('orderInfo')) || [];
-    let productsPrice = JSON.parse(localStorage.getItem('productsPrice')) || [];
-    let totalPrice = productsPrice.length ? productsPrice.reduce((a, b) => a + b) : 0;
+    // let productsPrice = JSON.parse(localStorage.getItem('productsPrice')) || [];
+    let totalPrice = JSON.parse(localStorage.getItem('totalPrice'));
 
 
     return (

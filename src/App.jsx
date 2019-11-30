@@ -6,6 +6,7 @@ import Cart from './sections/cart/Cart';
 import Customer from './sections/customer/Customer';
 import Address from './sections/address/Address';
 import ReadyOrder from './sections/readyOrder/ReadyOrder';
+import CreatePizza from './sections/createPizza/CreatePizza';
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
         <Route path='/Customer' component={Customer} />
         <Route path='/Address' component={Address} />
         <Route path='/ReadyOrder' component={ReadyOrder} />
+        <Route path='/CreatePizza' component={CreatePizza} />
       </Switch>
     </div>
   );

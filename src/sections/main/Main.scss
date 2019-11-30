@@ -3,10 +3,28 @@
 .main {
     position: relative;
     background: grey url(https://storage.needpix.com/rsynced_images/pizza-1507444875nkl.jpg) center/cover;
+
+    // input {
+    //     width: 100%;
+    // }
 }
 
 .container {
     font-family: $font-base;
+
+    .search__option {
+        display: flex;
+        justify-content: space-around;
+
+        div {
+            width: 45%;
+        }
+
+        input, 
+        select {
+            width: 100%;
+        }
+    }
 
     .row {
         align-items: center;

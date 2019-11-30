@@ -1,11 +1,13 @@
 @import "Main/../../sections/main/Main.scss";
 @import "InputElement/../../elements/inputElement/InputElement.scss";
-@import "ButtonElement/../../elements/ButtonElement/ButtonElement.scss";
+@import "ButtonElement/../../elements/buttonElement/ButtonElement.scss";
+@import "SelectElement/../../elements/selectElement/SelectElement.scss";
 @import "Header/../../sections/Header/Header.scss";
 @import "Footer/../../sections/Footer/Footer.scss";
 @import "Cart/../../sections/cart/Cart.scss";
 @import "Customer/../../sections/customer/Customer.scss";
 @import "Address/../../sections/address/Address.scss";
+@import "CreatePizza/../../sections/createPizza/CreatePizza.scss";
 
 @import "vars";
 @import "mixins";

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './../../scss/App.scss';
 import pizzaList from './../../data/listOfPizzas';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,31 +8,26 @@ import Pizza from './../../components/Pizza';
 
 
 
-const Main = ({ arrOfPizzas, setArrOfPizzas, onSelect, count, setCount }) => {
+const Main = ({ arrOfPizzas, onSelect, count, setCount, findPizza }) => {
     const [currentPizza, setCurrentPizza] = useState({ ...pizzaList[0] })
-
-    const findPizza = (e) => {
-        const value = e.target.value.toLocaleLowerCase().replace(' ', '');
-        [...pizzaList].filter(pizza => {
-            return pizza.name.replace(' ', '').toLocaleLowerCase().includes(value) ||
-                pizza.composition.find(compose => compose.toLocaleLowerCase().includes(value) ||
-                    pizza.price.toString().includes(value));
-        })
-    }
 
     return (
         <main className="main">
             <div className="container">
-                <InputElement
-                onInput={findPizza}
-                />
+                <div className="search__option">
+                    <InputElement
+                        placeholder='Начните вводить название или цену...'
+                        onInput={findPizza}
+                    />
 
-                <SelectElement
-                    onChange={onSelect}
-                    value1='Не сортировать'
-                    value2='Цена по возрастанию'
-                    value3='По убыванию'
-                />
+                    <SelectElement
+                        onChange={onSelect}
+                        value1='Не сортировать'
+                        value2='По возрастанию'
+                        value3='По убыванию'
+                    />
+                </div>
+
                 <div className="row">
                     {
                         arrOfPizzas.map((pizza, id) => {
