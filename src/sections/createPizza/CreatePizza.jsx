@@ -1,16 +1,15 @@
 import React, { useState, useRef } from 'react';
 import ButtonElement from './../../elements/ButtonElement/ButtonElement';
 import InputElement from './../../elements/inputElement/InputElement';
-import listOfPizzas from './../../data/listOfPizzas';
 import compositionList from './../../data/compositionList';
 import { Link } from 'react-router-dom';
 
 class createPizzaModel {
     constructor({ img, name, composition, price, caloricity }) {
-        this.id = listOfPizzas.length + 1;
-        this.img = img
+        this.id = listOfCustomPizzas.length + 1;
+        this.img = img;
         this.name = '';
-        this.composition = [];
+        this.composition = composition;
         this.price = price;
         this.caloricity = caloricity;
         this.isNew = true;
@@ -30,7 +29,10 @@ class createPizzaModel {
     }
 }
 
+let listOfCustomPizzas = JSON.parse(localStorage.getItem('listOfCustomPizzas')) || [];
+
 const pizzaModel = {
+    id: 0,
     img: '',
     name: '',
     composition: [],
@@ -43,37 +45,36 @@ const CreatePizza = () => {
     const addIngredient = (e) => {
         let composition = pizzaModel.composition;
 
-        // pizzaModel.price = pizzaModel.composition.length ? 100 : 0;
-        // pizzaModel.caloricity = pizzaModel.composition.length ? 1000 : 0;
-
-
         if (e.target.checked) {
-            composition.push(e.target.id);
-            pizzaModel.price = e.target.price + 100;
-            pizzaModel.caloricity = e.target.caloricity + 1000;
-        } else {
-            pizzaModel.composition = composition.filter(composId => composId !== e.target.id);
+            composition.push(e.target.value);
+            pizzaModel.price += compositionList[e.target.id - 1].price;
+            pizzaModel.caloricity += compositionList[e.target.id - 1].caloricity;
         }
-
-
-
-
-        // pizzaModel.price += +e.target.price;
-        // pizzaModel.composition.forEach(composId => {
-        //     pizzaModel.price += compositionList.find(el => el.id === composId).price;
-        // })
-        // pizzaModel.composition.forEach(composId => {
-        //     pizzaModel.caloricity += compositionList.find(el => el.id === composId).caloricity;
-        // })
-
-        console.log(pizzaModel)
+        if (!e.target.checked) {
+            composition.splice(e.target, 1);
+            pizzaModel.price -= compositionList[e.target.id - 1].price;
+            pizzaModel.caloricity -= compositionList[e.target.id - 1].caloricity;
+        }
+        console.log(pizzaModel.composition)
     }
 
 
-
-    const consLog = (e) => {
-        !e.target.checked ? console.log('unchecked') : console.log('checked')
+    const setNameOfPizza = (e) => {
+        pizzaModel.name = e.target.value
     }
+
+    const createCustomPizza = () => {
+        let newPizza = new createPizzaModel(pizzaModel);
+        listOfCustomPizzas.push(newPizza);
+        console.log(pizzaModel.composition)
+        localStorage.setItem('listOfCustomPizzas', JSON.stringify(listOfCustomPizzas));
+    }
+
+    const clearCustomPizzas = () => {
+        listOfCustomPizzas = [];
+        localStorage.setItem('listOfCustomPizzas', JSON.stringify(listOfCustomPizzas));
+    }
+
 
     return (
         <div className="create__pizza">
@@ -82,11 +83,13 @@ const CreatePizza = () => {
                 {
                     compositionList.map(pizza => {
                         return (
-                            <InputElement key={pizza.id} type="checkbox" id={pizza.id} htmlFor={pizza.id} label={pizza.name} onInput={addIngredient} />
+                            <InputElement key={pizza.id} type="checkbox" id={pizza.id} value={pizza.name} htmlFor={pizza.id} label={pizza.name} onInput={addIngredient} />
                         )
                     })
                 }
-                <ButtonElement className="button" title="Cоздать" />
+                <InputElement type="text" placeholder="Введите свое название" onInput={setNameOfPizza} />
+                <ButtonElement className="button" type="submit" title="Cоздать" onClick={createCustomPizza} />
+                <ButtonElement className="button" title="Удалить все" onClick={clearCustomPizzas} />
             </div>
         </div>
     )
