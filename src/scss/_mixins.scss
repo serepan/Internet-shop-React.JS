@@ -32,15 +32,6 @@
     }
   }
 
-  // Animation
-  @mixin progress-animation($finish) {
-    from {
-      width: 0;
-    }
-    to {
-      width: $finish;
-    }
-  }
 
   // Placeholder
 

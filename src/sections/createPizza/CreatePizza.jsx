@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import ButtonElement from './../../elements/ButtonElement/ButtonElement';
 import InputElement from './../../elements/inputElement/InputElement';
 import compositionList from './../../data/compositionList';
@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom';
 class createPizzaModel {
     constructor({ img, name, composition, price, caloricity }) {
         this.id = listOfCustomPizzas.length + 1;
-        this.img = img;
+        // this.img = img;
         this.name = '';
-        this.composition = composition;
+        this.composition = pizzaModel.composition;
         this.price = price;
         this.caloricity = caloricity;
         this.isNew = true;
@@ -36,24 +36,30 @@ const pizzaModel = {
     img: '',
     name: '',
     composition: [],
-    price: 0,
-    caloricity: 0,
+    price: 100,
+    caloricity: 1000,
 }
 
 const CreatePizza = () => {
 
-    const addIngredient = (e) => {
-        let composition = pizzaModel.composition;
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [caloricity, setCaloricity] = useState(0);
+    const [img, setImg] = useState("https://cdn2.iconfinder.com/data/icons/creative-15/64/pizza-Italian-food-fast-food-512.png");
 
+    const addIngredient = (e) => {
         if (e.target.checked) {
-            composition.push(e.target.value);
+            pizzaModel.composition.push(e.target.value);
             pizzaModel.price += compositionList[e.target.id - 1].price;
+            setTotalPrice(pizzaModel.price)
             pizzaModel.caloricity += compositionList[e.target.id - 1].caloricity;
+            setCaloricity(pizzaModel.caloricity)
         }
         if (!e.target.checked) {
-            composition.splice(e.target, 1);
+            pizzaModel.composition.splice(e.target, 1);
             pizzaModel.price -= compositionList[e.target.id - 1].price;
+            setTotalPrice(pizzaModel.price)
             pizzaModel.caloricity -= compositionList[e.target.id - 1].caloricity;
+            setCaloricity(pizzaModel.caloricity)
         }
         console.log(pizzaModel.composition)
     }
@@ -64,32 +70,53 @@ const CreatePizza = () => {
     }
 
     const createCustomPizza = () => {
-        let newPizza = new createPizzaModel(pizzaModel);
+        let newPizza = { ...pizzaModel };
         listOfCustomPizzas.push(newPizza);
-        console.log(pizzaModel.composition)
         localStorage.setItem('listOfCustomPizzas', JSON.stringify(listOfCustomPizzas));
     }
 
     const clearCustomPizzas = () => {
         listOfCustomPizzas = [];
         localStorage.setItem('listOfCustomPizzas', JSON.stringify(listOfCustomPizzas));
+        window.location.reload();
+    }
+
+    const addPizzaImage = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const fileReader = new FileReader();
+        fileReader.onloadend = () => {
+            setImg(fileReader.result);
+        };
+        fileReader.readAsDataURL(file);
+        console.log(e.target.files)
     }
 
 
     return (
         <div className="create__pizza">
             <div className="container">
-                <Link to='/' className="button">В магазин</Link>
-                {
-                    compositionList.map(pizza => {
-                        return (
-                            <InputElement key={pizza.id} type="checkbox" id={pizza.id} value={pizza.name} htmlFor={pizza.id} label={pizza.name} onInput={addIngredient} />
-                        )
-                    })
-                }
-                <InputElement type="text" placeholder="Введите свое название" onInput={setNameOfPizza} />
+                <div className="inputs">
+                    <div className="inputs__checkbox">
+
+                        {
+                            compositionList.map(pizza => {
+                                return (
+                                    <InputElement key={pizza.id} type="checkbox" id={pizza.id} value={pizza.name} htmlFor={pizza.id} label={pizza.name} onInput={addIngredient} />
+                                )
+                            })
+                        }
+                        <InputElement type="text" placeholder="Введите свое название" onInput={setNameOfPizza} />
+                    </div>
+
+                    <InputElement type="file" onInput={addPizzaImage} />
+                    <div className="inputs__img"><img src={img} alt="" /></div>
+                </div>
+                <div><h1> Total price: {pizzaModel.composition.length ? totalPrice : 0} грн.</h1></div>
+                <div><h1> Total caloricity: {pizzaModel.composition.length ? caloricity : 0} cal</h1></div>
                 <ButtonElement className="button" type="submit" title="Cоздать" onClick={createCustomPizza} />
                 <ButtonElement className="button" title="Удалить все" onClick={clearCustomPizzas} />
+                <Link to='/' className="button">В магазин</Link>
             </div>
         </div>
     )
