@@ -2,8 +2,9 @@ import React from 'react';
 import '../scss/App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ButtonElement from '../elements/ButtonElement/ButtonElement';
+import Modal from '../components/Modal';
 
-const Pizza = ({ pizza, setCurrentPizza, count, setCount }) => {
+const Pizza = ({ pizza, setCurrentPizza, count, setCount, onClick, isShowModal, setIsShowModal, currentPizza, arrOfPizzas }) => {
     let productsArr = JSON.parse(localStorage.getItem('productsArr')) || [];
     let productsPrice = JSON.parse(localStorage.getItem('productsPrice')) || [];
     count = productsArr.length;
@@ -18,18 +19,29 @@ const Pizza = ({ pizza, setCurrentPizza, count, setCount }) => {
         setCount(++count);
     }
 
+    const showModal = () => {
+        setCurrentPizza(pizza);
+        setIsShowModal(!isShowModal)
+    }
+
     return (
         <div className="pizza__item-wrapper col-12 col-sm-6 col-md-4 col-lg-3">
-            <div className="pizza__item">
+            <div className="pizza__item" onClick={showModal}>
+
                 <h3>{pizza.name}</h3>
                 <div className="pizza__item-img">
                     <img src={pizza.img} alt="pizza" />
                 </div>
                 <h5>{pizza.price} грн.</h5>
-                <div className="pizza__item-hover">
-                    <h4>Состав: {pizza.composition.join(', ')}</h4>
-                    <h4>{pizza.caloricity} cal</h4>
-                </div>
+                {
+                    isShowModal && <Modal
+                        isShowModal={isShowModal}
+                        setIsShowModal={setIsShowModal}
+                        currentPizza={currentPizza}
+                        arrOfPizzas={arrOfPizzas}
+                        pizza={pizza}
+                    />
+                }
                 <div className="button_element">
                     <ButtonElement
                         onClick={addToCart}
